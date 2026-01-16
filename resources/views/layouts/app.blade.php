@@ -153,7 +153,7 @@
                         <a href="https://wa.me/6281234567890" target="_blank" class="group flex items-center gap-3 hover:opacity-100 transition opacity-90">
                             <div class="text-right hidden md:block">
                                 <p class="text-[10px] text-[#BB9045] font-bold uppercase tracking-wider">WhatsApp</p>
-                                <p class="font-mono text-sm text-white">0812-3456-7890</p>
+                                <p class="font-mono text-sm text-white">0851-1762-5516</p>
                             </div>
                             {{-- Icon --}}
                             <div class="w-9 h-9 rounded-full border border-[#BB9045] flex items-center justify-center text-[#BB9045] group-hover:bg-[#BB9045] group-hover:text-[#6D1919] transition duration-300">

@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBookingRequest;
 use App\Models\Booking;
 use App\Models\Room;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Storage;
 
 class BookingController extends Controller
 {
     public function create()
     {
-        $rooms = Room::all();
+        $rooms = Room::select(['id', 'name', 'slug', 'deposit', 'base_cost', 'person_cost'])->get();
 
         $bookedDates = Booking::where('booking_date', '>=', now()->format('Y-m-d'))
             ->whereIn('status', ['confirmed', 'pending'])
+            ->select(['room_id', 'booking_date'])
             ->get()
             ->groupBy('room_id')
             ->map(function ($events) {

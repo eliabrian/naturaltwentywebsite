@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -31,22 +32,22 @@ class BoardGame extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function getDurationAttribute()
+    protected function duration(): Attribute
     {
-        if ($this->playtime_min == $this->playtime_max) {
-            return "{$this->playtime_min} mins";
-        }
-
-        return "{$this->playtime_min}-{$this->playtime_max} mins";
+        return Attribute::make(
+            get: fn () => $this->playtime_min == $this->playtime_max
+                ? "{$this->playtime_min} mins"
+                : "{$this->playtime_min}-{$this->playtime_max} mins"
+        );
     }
 
-    public function getPlayersAttribute()
+    protected function players(): Attribute
     {
-        if ($this->min_players == $this->max_players) {
-            return "{$this->min_players} Players";
-        }
-
-        return "{$this->min_players}-{$this->max_players} Players";
+        return Attribute::make(
+            get: fn () => $this->min_players == $this->max_players
+                ? "{$this->min_players} Players"
+                : "{$this->min_players}-{$this->max_players} Players"
+        );
     }
 
     protected static function boot()

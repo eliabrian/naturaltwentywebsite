@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MenuItem extends Model
 {
@@ -17,13 +19,25 @@ class MenuItem extends Model
         'is_available',
     ];
 
-    public function category()
+    protected function casts(): array
+    {
+        return [
+            'price' => 'decimal:2',
+            'discount_price' => 'decimal:2',
+            'is_bestseller' => 'boolean',
+            'is_available' => 'boolean',
+        ];
+    }
+
+    public function category(): BelongsTo
     {
         return $this->belongsTo(MenuCategory::class, 'menu_category_id');
     }
 
-    public function getHasDiscountAttribute()
+    protected function hasDiscount(): Attribute
     {
-        return $this->discount_price !== null && $this->discount_price < $this->price;
+        return Attribute::make(
+            get: fn () => $this->discount_price !== null && $this->discount_price < $this->price
+        );
     }
 }

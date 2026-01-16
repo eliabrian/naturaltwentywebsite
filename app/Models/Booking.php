@@ -31,6 +31,16 @@ class Booking extends Model
         'notes',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'booking_date' => 'date',
+            'eta' => 'datetime',
+            'need_dm' => 'boolean',
+            'total_price' => 'decimal:2',
+        ];
+    }
+
     /**
      * Get the room that belongs to the booking
      */
