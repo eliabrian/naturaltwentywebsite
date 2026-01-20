@@ -6,6 +6,7 @@ use App\Events\BookingCreated;
 use App\Http\Requests\StoreBookingRequest;
 use App\Models\Booking;
 use App\Models\Room;
+use App\Models\User;
 use Filament\Notifications\Notification;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
@@ -64,7 +65,7 @@ class BookingController extends Controller
                 'customer_phone' => $request->customer_phone,
                 'booking_date' => $request->booking_date,
                 'eta' => $request->eta,
-                'notes' => $request->notes,
+                'notes' => $request->notes ?? "",
 
                 'total_person' => $request->total_person,
                 'need_dm' => $request->has('need_dm'),
