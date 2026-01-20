@@ -36,6 +36,7 @@ class StoreBookingRequest extends FormRequest
             ],
             'need_dm' => 'boolean',
             'payment_proof' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'notes' => 'string|max:255',
         ];
     }
 }

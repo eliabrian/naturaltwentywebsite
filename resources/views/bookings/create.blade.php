@@ -143,6 +143,11 @@
                             <p class="text-xs text-[#6D1919] mt-1 font-semibold">Price: Rp 85.000,- per person</p>
                         </div>
 
+                        <div class="mb-4">
+                            <label for="notes" class="block text-[#6D1919] text-sm font-bold mb-2">Notes</label>
+                            <input type="text" class="w-full bg-white border border-[#BB9045] rounded px-3 py-2 text-sm focus:ring-2 focus:ring-[#6D1919] focus:outline-none placeholder-[#BB9045]" name="notes" value="{{ old('notes') }}">
+                        </div>
+
                         <div class="flex items-center">
                             <input type="checkbox" name="need_dm" id="need_dm" value="1" class="w-4 h-4 text-[#6D1919] bg-white border-[#BB9045] rounded focus:ring-[#BB9045]" {{ old('need_dm') ? 'checked' : '' }}>
                             <label for="need_dm" class="ml-2 text-[#6D1919] text-sm font-bold">We need a Dungeon Master (DM)</label>
@@ -204,7 +209,7 @@
                                 {{-- 1. The Big Deposit (Pay Now) --}}
                                 <div class="mb-2">
                                     <p class="text-xs text-[#6D1919] uppercase tracking-widest font-bold mb-1">
-                                        Deposit (Pay Now)
+                                        Please transfer a deposit (DP) of:
                                     </p>
                                     <p class="text-4xl md:text-5xl font-extrabold text-[#6D1919] tracking-tight" id="deposit_display">
                                         Rp 0

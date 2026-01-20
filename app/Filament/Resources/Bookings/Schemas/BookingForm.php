@@ -80,6 +80,9 @@ class BookingForm
                             ->required()
                             ->native(false)
                             ->seconds(false),
+
+                        TextInput::make('notes')
+                            ->label('Notes'),
                     ])->columns(2),
 
                 Section::make('D&D Session Details')

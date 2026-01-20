@@ -62,16 +62,15 @@ class BookingController extends Controller
                 'customer_phone' => $request->customer_phone,
                 'booking_date' => $request->booking_date,
                 'eta' => $request->eta,
+                'notes' => $request->notes,
 
-                // D&D Specifics
                 'total_person' => $request->total_person,
-                'need_dm' => $request->has('need_dm'), // Checkbox returns 'on' or null
+                'need_dm' => $request->has('need_dm'),
 
-                // Financials & Status
                 'total_price' => $totalPrice,
                 'payment_proof' => $proofPath,
-                'status' => 'pending',        // Waiting for admin approval
-                'payment_status' => 'unpaid', // Marked paid only after admin checks receipt
+                'status' => 'pending',
+                'payment_status' => 'unpaid',
             ]);
 
             return redirect()->back()->with('success', 'Booking requested! We will check your payment and confirm via WhatsApp.');
