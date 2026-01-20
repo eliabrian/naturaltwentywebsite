@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BookingCreated;
 use App\Http\Requests\StoreBookingRequest;
 use App\Models\Booking;
 use App\Models\Room;
+use Filament\Notifications\Notification;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 
@@ -56,7 +58,7 @@ class BookingController extends Controller
         }
 
         try {
-            Booking::create([
+            $booking = Booking::create([
                 'room_id' => $request->room_id,
                 'customer_name' => $request->customer_name,
                 'customer_phone' => $request->customer_phone,
@@ -72,6 +74,17 @@ class BookingController extends Controller
                 'status' => 'pending',
                 'payment_status' => 'unpaid',
             ]);
+
+            BookingCreated::dispatch($booking);
+
+            $users = User::all();
+
+            Notification::make()
+                ->title("New {$booking->room->name} Booking!")
+                ->body("{$booking->customer_name} just booked.")
+                ->success()
+                ->broadcast($users)
+                ->save();
 
             return redirect()->back()->with('success', 'Booking requested! We will check your payment and confirm via WhatsApp.');
 
