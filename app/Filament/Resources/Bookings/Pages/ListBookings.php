@@ -16,4 +16,11 @@ class ListBookings extends ListRecords
             CreateAction::make(),
         ];
     }
+
+    public function getListeners(): array
+    {
+        return [
+            "echo:admin-channel,BookingCreated" => '$refresh',
+        ];
+    }
 }
