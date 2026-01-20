@@ -84,8 +84,7 @@ class BookingController extends Controller
                 ->title("New {$booking->room->name} Booking!")
                 ->body("{$booking->customer_name} just booked.")
                 ->success()
-                ->broadcast($users)
-                ->save();
+                ->broadcast($users);
 
             return redirect()->back()->with('success', 'Booking requested! We will check your payment and confirm via WhatsApp.');
 
