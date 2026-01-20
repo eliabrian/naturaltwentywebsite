@@ -74,6 +74,18 @@
             x-cloak>
 
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                {{-- Mobile Home --}}
+                <a href="{{ route('home') }}"
+                class="block px-3 py-2 rounded-md text-base font-bold uppercase tracking-wider transition {{ request()->routeIs('home') ? 'text-[#BB9045] bg-[#6D1919] border-l-4 border-[#BB9045]' : 'text-[#F4E7D4] hover:text-[#BB9045] hover:bg-[#6D1919]' }}">
+                    Home
+                </a>
+
+                {{-- Mobile Menu --}}
+                <a href="{{ route('menu.index') }}"
+                class="block px-3 py-2 rounded-md text-base font-bold uppercase tracking-wider transition {{ request()->routeIs('menu.*') ? 'text-[#BB9045] bg-[#6D1919] border-l-4 border-[#BB9045]' : 'text-[#F4E7D4] hover:text-[#BB9045] hover:bg-[#6D1919]' }}">
+                    Our Menu
+                </a>
+
                 {{-- Mobile Book Room --}}
                 <a href="{{ route('bookings.create') }}"
                 class="block px-3 py-2 rounded-md text-base font-bold uppercase tracking-wider transition {{ request()->routeIs('bookings.*') ? 'text-[#BB9045] bg-[#6D1919] border-l-4 border-[#BB9045]' : 'text-[#F4E7D4] hover:text-[#BB9045] hover:bg-[#6D1919]' }}">

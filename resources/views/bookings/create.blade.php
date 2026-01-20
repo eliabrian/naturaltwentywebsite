@@ -253,6 +253,7 @@
             const roomSelect = document.getElementById('room_select');
 
             const fp = flatpickr("#datepicker", {
+                disableMobile: "true",
                 minDate: "today",
                 dateFormat: "Y-m-d",
                 disable: [], // Initially empty until room is picked
