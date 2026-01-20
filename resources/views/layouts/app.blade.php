@@ -234,5 +234,6 @@
     </footer>
 
     @yield('scripts')
+    @vite('resources/css/app.js')
 </body>
 </html>
