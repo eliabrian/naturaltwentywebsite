@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Events\BookingCreated;
 use App\Http\Requests\StoreBookingRequest;
+use App\Mail\NewBookingAlert;
 use App\Models\Booking;
 use App\Models\Room;
 use App\Models\User;
 use Filament\Notifications\Notification;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class BookingController extends Controller
@@ -85,6 +87,8 @@ class BookingController extends Controller
                 ->body("{$booking->customer_name} just booked.")
                 ->success()
                 ->broadcast($users);
+
+            Mail::to($users)->send(new NewBookingAlert($booking));
 
             return redirect()->back()->with('success', 'Booking requested! We will check your payment and confirm via WhatsApp.');
 
