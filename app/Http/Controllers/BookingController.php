@@ -88,7 +88,7 @@ class BookingController extends Controller
                 ->success()
                 ->broadcast($users);
 
-            Mail::to($users)->send(new NewBookingAlert($booking));
+            Mail::to('natural20bgc@gmail.com')->send(new NewBookingAlert($booking));
 
             return redirect()->back()->with('success', 'Booking requested! We will check your payment and confirm via WhatsApp.');
 
