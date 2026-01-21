@@ -49,7 +49,7 @@
                                         {{-- Safe Date Formatting --}}
                                         {{ $booking->booking_date?->format('d M Y') ?? 'Date Not Set' }}
                                         <span style="color: #666; margin: 0 5px;">@</span>
-                                        {{ $booking->eta ?? '--:--' }}
+                                        {{ $booking->eta->format('H:i') ?? '--:--' }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -87,7 +87,7 @@
                                         Contact Scroll
                                     </td>
                                     <td style="color: #333;">
-                                        <a href="tel:{{ $booking->customer_phone }}" style="color: #6D1919; text-decoration: none; font-weight: bold;">
+                                        <a href="https://wa.me/{{ $booking->customer_phone }}" style="color: #6D1919; text-decoration: none; font-weight: bold;">
                                             {{ $booking->customer_phone }}
                                         </a>
                                     </td>
