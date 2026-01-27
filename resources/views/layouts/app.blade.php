@@ -18,7 +18,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}" class="flex items-center gap-2 group">
                         {{-- Logo Image --}}
-                        <img src="https://images.unsplash.com/photo-1632516643720-e7f5d7d6ecc9?w=400&q=80" alt="Cafe Logo" class="h-18 w-auto object-contain group-hover:opacity-90 transition">
+                        <img src="{{ asset('storage/logo/icon.png') }}" alt="Cafe Logo" class="h-18 w-auto object-contain group-hover:opacity-90 transition">
                     </a>
                 </div>
 
@@ -115,7 +115,7 @@
                 <div class="text-center md:text-left">
                     {{-- Logo --}}
                     <div class="flex items-center justify-center md:justify-start gap-3 mb-4">
-                        <img src="https://images.unsplash.com/photo-1632516643720-e7f5d7d6ecc9?w=200&q=80" alt="Logo" class="h-12 w-auto object-contain bg-white/10 rounded-full p-1">
+                        <img src="{{ asset('storage/logo/icon.png') }}" alt="Logo" class="h-12 w-auto object-contain bg-white/10 rounded-full p-1">
                         <span class="font-serif font-bold text-2xl tracking-widest text-[#BB9045]">Natural Twenty Board Game</span>
                     </div>
                     <p class="text-sm opacity-80 leading-relaxed max-w-xs mx-auto md:mx-0">

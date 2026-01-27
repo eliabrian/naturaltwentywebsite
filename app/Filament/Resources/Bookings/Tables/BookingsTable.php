@@ -117,7 +117,7 @@ class BookingsTable
                     ->after(function (Booking $record) {
                         $date = Carbon::parse($record->booking_date)->format('d M Y');
                         $roomName = $record->room->name;
-                        $price = number_format($record->total_price, 0, ',', '.');
+                        $price = number_format($record->room->deposit, 0, ',', '.');
 
                         $message = "Hello Traveller! 👋\n\n"
                             ."Your booking for *{$roomName}* on *{$date}* at *{$record->eta}* is CONFIRMED! ✅\n\n"
