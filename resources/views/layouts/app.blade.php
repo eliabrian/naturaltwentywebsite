@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title') | Natural Twenty Board Game Cafe</title>
+    <link rel="icon" href="{{ asset('storage/favicon/favicon.ico') }}" type="image/png">
+
+    <link rel="icon" type="image/png" href="{{ asset('storage/favicon/favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset('storage/favicon/favicon.svg') }}" />
+    <link rel="shortcut icon" href="{{ asset('storage/favicon/favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('storage/favicon/apple-touch-icon.png') }}" />
+    <link rel="manifest" href="{{ asset('storage/favicon/site.webmanifest') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite('resources/css/app.css')
@@ -173,7 +180,7 @@
                             </div>
                             {{-- Mobile Only Label (appears next to icon on small screens) --}}
                             <div class="md:hidden text-left">
-                                <p class="font-mono text-sm">+62 812-3456-7890</p>
+                                <p class="font-mono text-sm">+62 851-1762-5516</p>
                             </div>
                         </a>
 

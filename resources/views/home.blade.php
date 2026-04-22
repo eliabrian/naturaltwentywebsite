@@ -41,9 +41,11 @@
     <section class="py-20 px-6 max-w-6xl mx-auto bg-[#F4E7D4] text-stone-800">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {{-- Image Grid --}}
-            <div class="relative">
+            <div class="relative group">
                 <div class="absolute -inset-4 bg-[#BB9045] rounded-lg opacity-20 rotate-3"></div>
-                <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=800&q=80" alt="Board Game Cafe" class="relative rounded-lg shadow-2xl border-4 border-white transform hover:scale-105 transition duration-500">
+                <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=800&q=80" 
+                    alt="Board Game Cafe" 
+                    class="relative w-full h-[400px] object-cover rounded-lg shadow-2xl border-4 border-white transform hover:scale-105 transition duration-500">
             </div>
 
             {{-- Text Content --}}
@@ -219,7 +221,7 @@
                 </div>
                 {{-- Pic 3 --}}
                 <div class="group relative overflow-hidden rounded-lg shadow-lg border border-[#BB9045] h-64">
-                    <img src="https://images.unsplash.com/photo-1580327344181-c1163234e5a0?w=800&q=80" alt="D&D Setup" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                    <img src="{{ asset('storage/room/D&DROOM.jpg') }}" alt="D&D Setup" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
                     <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition duration-500"></div>
                     <div class="absolute bottom-4 left-4 text-[#F4E7D4] font-bold opacity-0 group-hover:opacity-100 transition duration-500 translate-y-4 group-hover:translate-y-0">
                         Private D&D Setup

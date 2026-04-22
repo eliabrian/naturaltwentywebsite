@@ -120,7 +120,7 @@ class BookingsTable
                         $price = number_format($record->room->deposit, 0, ',', '.');
 
                         $message = "Hello Traveller! 👋\n\n"
-                            ."Your booking for *{$roomName}* on *{$date}* at *{$record->eta}* is CONFIRMED! ✅\n\n"
+                            ."Your booking for *{$roomName}* on *{$date}* at *{$record->eta->format('H:i')}* is CONFIRMED! ✅\n\n"
                             ."Payment received: Rp {$price}.\n"
                             .'Thank you, see you soon!';
 

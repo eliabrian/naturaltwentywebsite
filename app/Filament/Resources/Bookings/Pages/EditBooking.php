@@ -23,7 +23,7 @@ class EditBooking extends EditRecord
         }
 
         $message = "Hello Traveller! 👋\n\n"
-            ."Your booking for *{$roomName}* on *{$date}* at *{$this->record->eta}* is CONFIRMED! ✅\n\n"
+            ."Your booking for *{$roomName}* on *{$date}* at *{$this->record->eta->format('H:i')}* is CONFIRMED! ✅\n\n"
             ."Payment received: Rp {$price}.\n"
             .'Thank you, see you soon!';
 

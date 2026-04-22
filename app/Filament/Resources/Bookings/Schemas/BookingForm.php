@@ -59,7 +59,7 @@ class BookingForm
                             ->label('Booking Date')
                             ->required()
                             ->native(false)
-                            ->minDate(now())
+                            ->minDate(\Carbon\Carbon::now()->startOfDay())
                             ->displayFormat('d M Y')
                             ->disabledDates(function (Get $get) {
                                 $roomId = $get('room_id');
