@@ -72,6 +72,22 @@
         </template>
     </div>
 
+    <div style="display: flex; gap: 1rem; margin-bottom: 2rem; background: rgba(0,0,0,0.02); padding: 0.5rem; border-radius: 0.75rem; border: 1px solid rgba(156, 163, 175, 0.2);" class="dark:bg-gray-900/50 dark:border-gray-800">
+        <button 
+            wire:click="$set('activeStation', 'kitchen')"
+            style="flex: 1; padding: 1rem; border-radius: 0.5rem; font-weight: bold; font-size: 1.25rem; transition: all 0.2s; border: none; cursor: pointer; {{ $activeStation === 'kitchen' ? 'background-color: #ef4444; color: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);' : 'background: transparent; color: #6b7280;' }}"
+        >
+            👨‍🍳 Kitchen View
+        </button>
+        
+        <button 
+            wire:click="$set('activeStation', 'bar')"
+            style="flex: 1; padding: 1rem; border-radius: 0.5rem; font-weight: bold; font-size: 1.25rem; transition: all 0.2s; border: none; cursor: pointer; {{ $activeStation === 'bar' ? 'background-color: #3b82f6; color: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);' : 'background: transparent; color: #6b7280;' }}"
+        >
+            🍹 Bar View
+        </button>
+    </div>
+
     <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: start; min-height: 80vh;" class="lg:grid-cols-2">
         
         <div class="kds-column" style="border-radius: 1rem; padding: 1.5rem;">

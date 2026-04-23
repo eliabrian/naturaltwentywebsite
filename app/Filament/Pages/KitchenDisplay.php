@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Models\Order;
+use App\Models\OrderItem;
 use BackedEnum;
 use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
@@ -22,11 +23,24 @@ class KitchenDisplay extends Page
 
     protected static string|UnitEnum|null $navigationGroup = "Store Operations";
 
+    public string $activeStation = 'kitchen';
+
     #[Computed]
     public function pendingOrders()
     {
-        return Order::with(['items.menuItem', 'cafeTable'])
-            ->where('status', 'pending')
+        return Order::with(['cafeTable', 'items' => function ($query) {
+                
+                $query->where('status', 'pending')
+                      ->whereHas('menuItem', function ($q) {
+                          $q->where('station', $this->activeStation);
+                      })->with('menuItem');
+            }])
+            ->whereHas('items', function ($query) {
+                $query->where('status', 'pending')
+                      ->whereHas('menuItem', function ($q) {
+                          $q->where('station', $this->activeStation);
+                      });
+            })
             ->orderBy('created_at', 'asc')
             ->get();
     }
@@ -34,20 +48,38 @@ class KitchenDisplay extends Page
     #[Computed]
     public function preparingOrders()
     {
-        return Order::with('items.menuItem')
-            ->where('status', 'preparing')
+        return Order::with(['cafeTable', 'items' => function ($query) {
+                $query->where('status', 'preparing')
+                      ->whereHas('menuItem', function ($q) {
+                          $q->where('station', $this->activeStation);
+                      })->with('menuItem');
+            }])
+            ->whereHas('items', function ($query) {
+                $query->where('status', 'preparing')
+                      ->whereHas('menuItem', function ($q) {
+                          $q->where('station', $this->activeStation);
+                      });
+            })
             ->orderBy('created_at', 'asc')
             ->get();
     }
 
     public function startPreparing($orderId)
     {
-        Order::where('id', $orderId)->update(['status' => 'preparing']);
+        OrderItem::where('order_id', $orderId)
+            ->whereHas('menuItem', function($q) {
+                $q->where('station', $this->activeStation);
+            })
+            ->update(['status' => 'preparing']);
     }
 
     public function markAsReady($orderId)
     {
-        Order::where('id', $orderId)->update(['status' => 'ready']);
+        OrderItem::where('order_id', $orderId)
+            ->whereHas('menuItem', function($q) {
+                $q->where('station', $this->activeStation);
+            })
+            ->update(['status' => 'ready']);
     }
 
     #[On('echo:kds-orders,.order.placed')]

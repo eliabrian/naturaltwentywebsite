@@ -8,6 +8,7 @@ use App\Models\MenuCategory;
 use App\Models\MenuItem;
 use App\Models\Order;
 use BackedEnum;
+use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Support\Enums\Width;
@@ -56,6 +57,27 @@ class PosTerminal extends Page
     public function cafeTables()
     {
         return CafeTable::orderBy('name')->get();
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('history')
+                ->label('Order History')
+                ->icon('heroicon-o-clock')
+                ->color('gray')
+                ->slideOver()
+                ->modalHeading('Recent Orders')
+                ->modalContent(function () {
+                    $orders = Order::with(['cafeTable', 'items.menuItem'])
+                        ->latest()
+                        ->take(50)
+                        ->get();
+                        
+                    return view('filament.pages.pos-history', ['orders' => $orders]);
+                })
+                ->modalSubmitAction(false),
+        ];
     }
 
     public function addToCart(int $menuItemId)

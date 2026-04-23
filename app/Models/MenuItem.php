@@ -17,6 +17,7 @@ class MenuItem extends Model
         'discount_price',
         'is_bestseller',
         'is_available',
+        'station',
     ];
 
     protected function casts(): array

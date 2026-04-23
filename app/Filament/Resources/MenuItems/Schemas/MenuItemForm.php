@@ -59,6 +59,15 @@ class MenuItemForm
                         Toggle::make('is_bestseller')
                             ->label('Bestseller Badge')
                             ->onColor('warning'),
+
+                        Select::make('station')
+                            ->label('Preparation Station (Routing)')
+                            ->options([
+                                'kitchen' => '👨‍🍳 Kitchen (Food)',
+                                'bar' => '🍹 Bar (Drinks)',
+                            ])
+                            ->default('kitchen')
+                            ->required(),
                     ]),
 
                     Section::make('Photo')->schema([
