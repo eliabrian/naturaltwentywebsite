@@ -13,7 +13,9 @@
         "laravel/nightwatch": "^1.22",
         "laravel/reverb": "^1.0",
         "laravel/tinker": "^2.10.1",
-        "resend/resend-php": "^1.1"
+        "resend/resend-php": "^1.1",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "spatie/laravel-permission": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

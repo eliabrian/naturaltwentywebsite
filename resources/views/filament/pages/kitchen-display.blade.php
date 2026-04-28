@@ -124,8 +124,12 @@
                                 <div class="kds-divider" style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom-width: 1px; border-bottom-style: dashed; padding-bottom: 0.5rem;">
                                     <div>
                                         <span class="kds-text-main" style="font-weight: bold; font-size: 1.1rem;">{{ $item->menuItem->name }}</span>
-                                        @if($item->special_instructions)
-                                            <p style="font-size: 0.85rem; color: #ea580c; font-style: italic; margin-top: 0.25rem;">Note: {{ $item->special_instructions }}</p>
+                                        
+                                        @if($item->note)
+                                            <p style="font-size: 0.85rem; color: #dc2626; font-weight: bold; margin-top: 0.25rem;">
+                                                <svg style="width: 1rem; height: 1rem; display: inline; margin-bottom: 2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                                Note: {{ $item->note }}
+                                            </p>
                                         @endif
                                     </div>
                                     <span class="kds-qty-badge" style="padding: 0.25rem 0.75rem; border-radius: 9999px; font-weight: 900; font-size: 1.2rem;">
@@ -175,6 +179,13 @@
                                 <div class="kds-divider" style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom-width: 1px; border-bottom-style: dashed; padding-bottom: 0.5rem;">
                                     <div>
                                         <span class="kds-text-main" style="font-weight: bold; font-size: 1.1rem;">{{ $item->menuItem->name }}</span>
+                                        
+                                        @if($item->note)
+                                            <p style="font-size: 0.85rem; color: #dc2626; font-weight: bold; margin-top: 0.25rem;">
+                                                <svg style="width: 1rem; height: 1rem; display: inline; margin-bottom: 2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                                Note: {{ $item->note }}
+                                            </p>
+                                        @endif
                                     </div>
                                     <span class="kds-qty-badge" style="padding: 0.25rem 0.75rem; border-radius: 9999px; font-weight: 900; font-size: 1.2rem;">
                                         x{{ $item->quantity }}

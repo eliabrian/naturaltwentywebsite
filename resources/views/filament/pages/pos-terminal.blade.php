@@ -89,28 +89,34 @@
             </div>
 
             <div style="flex: 1; overflow-y: auto; border-top: 1px solid rgba(156, 163, 175, 0.2); border-bottom: 1px solid rgba(156, 163, 175, 0.2); padding: 0.5rem 0; margin-bottom: 1rem;">
-                @forelse($cart as $index => $cartItem)
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px dashed rgba(156, 163, 175, 0.2);">
-                        <div style="display: flex; flex-direction: column; gap: 0.25rem;">
-                            <span style="font-weight: 600; font-size: 1rem; line-height: 1.2;">{{ $cartItem['name'] }}</span>
-                            <span style="font-size: 0.85rem; opacity: 0.7;">Qty: {{ $cartItem['quantity'] }} &times; Rp {{ number_format($cartItem['price'], 0, ',', '.') }}</span>
+                @forelse($cart as $index => $item)
+                    <div style="display: flex; flex-direction: column; padding: 0.75rem; border-bottom: 1px solid rgba(156, 163, 175, 0.2);">
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <div style="font-weight: bold; flex: 1;" class="dark:text-white">
+                                {{ $item['name'] }}
+                            </div>
+                            
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="font-size: 0.9rem; color: #6b7280;" class="dark:text-gray-400">
+                                    Rp {{ number_format($item['price'], 0, ',', '.') }}
+                                </span>
+                                <button wire:click="removeFromCart({{ $index }})" style="color: #ef4444; background: transparent; border: none; cursor: pointer; padding: 0.25rem;">
+                                    <svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                </button>
+                            </div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <span style="font-weight: bold; font-size: 1rem;">Rp {{ number_format($cartItem['price'] * $cartItem['quantity'], 0, ',', '.') }}</span>
-                            <button 
-                                wire:click="removeFromCart({{ $index }})" 
-                                style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border: none; border-radius: 0.375rem; width: 32px; height: 32px; font-weight: bold; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;"
-                            >
-                                &times;
-                            </button>
-                        </div>
+
+                        <input 
+                            type="text" 
+                            wire:model="cart.{{ $index }}.note" 
+                            placeholder="Add note (e.g., Less ice, not spicy)..." 
+                            style="width: 100%; padding: 0.4rem 0.5rem; font-size: 0.85rem; border-radius: 0.25rem; border: 1px dashed rgba(156, 163, 175, 0.5); background: transparent; outline: none;"
+                            class="dark:text-white dark:border-gray-600 focus:border-blue-500"
+                        >
                     </div>
                 @empty
-                    <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0.5; gap: 1rem;">
-                        <span style="font-size: 2rem;">🛒</span>
-                        <span>Cart is empty</span>
-                    </div>
-                @endforelse
+                    @endforelse
             </div>
 
             <div style="margin-top: auto; padding-top: 1rem;">
@@ -131,16 +137,52 @@
                 </select>
                 
                 <button 
-                    wire:click="checkout" 
+                    wire:click="generateQris" 
                     @disabled(empty($cart))
                     style="width: 100%; padding: 1rem; background-color: #ea580c; color: white; border: none; border-radius: 0.5rem; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: opacity 0.2s;"
                     onmouseover="this.style.opacity='0.9'" 
                     onmouseout="this.style.opacity='1'"
                 >
-                    Send to Kitchen
+                    Pay with QRIS
                 </button>
             </div>
         </div>
 
+    </div>
+
+    <div x-data="{ show: @entangle('showPaymentModal') }" 
+         x-show="show" 
+         style="display: none; position: fixed; inset: 0; z-index: 50; background-color: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px);"
+         x-transition.opacity>
+         
+        <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 1rem;">
+
+            <div style="background-color: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); max-width: 28rem; width: 100%; text-align: center; position: relative;" class="dark:bg-gray-800">
+                
+                <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem; color: #111827;" class="dark:text-white">Scan to Pay</h2>
+                <p style="color: #6b7280; margin-bottom: 1.5rem;" class="dark:text-gray-400">Please scan this QRIS code using your e-wallet or mobile banking app.</p>
+
+                <div style="background-color: white; padding: 1rem; border-radius: 0.75rem; display: inline-block; border: 2px solid #e5e7eb; margin-bottom: 2rem;">
+                    @if($qrisData)
+                        <img 
+                            src="{{ $qrisData }}" 
+                            alt="QRIS Code"
+                            style="width: 250px; height: 250px; object-fit: contain;"
+                        >
+                    @endif
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <button wire:click="confirmPaymentSuccess" style="width: 100%; padding: 0.75rem; background-color: #22c55e; color: white; font-weight: bold; border-radius: 0.5rem; border: none; cursor: pointer;">
+                        [Sandbox] Simulate Payment Success
+                    </button>
+                    
+                    <button wire:click="cancelPayment" style="width: 100%; padding: 0.75rem; background-color: #ef4444; color: white; font-weight: bold; border-radius: 0.5rem; border: none; cursor: pointer;">
+                        Cancel Order
+                    </button>
+                </div>
+            </div>
+            
+        </div>
     </div>
 </x-filament-panels::page>
